@@ -20,7 +20,7 @@ jobs:
           COMMENT="@${{ github.event.pull_request.user.login }}, your pull request contains changes to test files."
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           COMMENT_URL="https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/comments"
-          FILES=${{ toJson(github.event.pull_request.changed_files) }}
+          FILES=$(git diff --name-only HEAD^)
 
           for FILE in ${{ github.event.pull_request.changed_files }}; 
           do
