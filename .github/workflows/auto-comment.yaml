@@ -9,14 +9,14 @@ jobs:
     steps:
       - name: Check PR Changes
         id: pr-changes
-        run: echo "::set-output name=changes::${{ toJson(github.event.pull_request.changed_files) }}"
+        run: echo "::CHANGES=${{ toJson(github.event.pull_request.changed_files) }}" >> $GITHUB_ENV
 
       - name: Create Comment
-        if: steps.pr-changes.outputs.changes != '[]'
+        if: $CHANGES != '[]'
         run: |
           # Use GitHub API to create a comment on the PR
           PR_NUMBER=${{ github.event.pull_request.number }}
-          COMMENT="@${{ author }} Your pull request contains changes to test files."
+          COMMENT="@${{ gitub.event.pull_request.user.login }} Your pull request contains changes to test files."
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           COMMENT_URL="https://api.github.com/repos/${{ github.repository }}/issues/${PR_NUMBER}/comments"
 
