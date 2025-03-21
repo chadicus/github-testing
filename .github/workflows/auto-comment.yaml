@@ -16,7 +16,7 @@ jobs:
         run: |
           # Use GitHub API to create a comment on the PR
           PR_NUMBER=${{ github.event.pull_request.number }}
-          HASH=${{ github.ref }}
+          HASH=${{ github.event.pull_request.head.sha }}
           COMMENT="@${{ github.event.pull_request.user.login }}, your pull request contains changes to test files."
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           COMMENT_URL="https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/comments"
