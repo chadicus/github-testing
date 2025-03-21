@@ -25,5 +25,6 @@ jobs:
 
           for FILE in ${FILES[@]};
           do
+              echo $FILE
               curl -s -H "Authorization: token ${GITHUB_TOKEN}" -X POST $COMMENT_URL -d "{\"body\":\"$COMMENT\", \"commit_id\":\"$HASH\", \"path\":\"${FILE}\",\"subject_type\":\"file\"}"
           done
