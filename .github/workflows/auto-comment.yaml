@@ -16,4 +16,4 @@ jobs:
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GH_REPO: ${{ github.repository }}
         run: 
-          gh pr review $PR_NUMBER --request-changes --body "Your pull request contains changes to test files."
+          gh pr review $PR_NUMBER --request-changes --body-file .github/workflows/comment.md
