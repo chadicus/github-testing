@@ -21,6 +21,6 @@ jobs:
           GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}
           COMMENT_URL="https://api.github.com/repos/${{ github.repository }}/pulls/${PR_NUMBER}/comments"
 
-          for FILE in ${{ github.event.pull_request.changed_files }}
+          for FILE in ${{ github.event.pull_request.changed_files }}; do
               curl -s -H "Authorization: token ${GITHUB_TOKEN}" -X POST $COMMENT_URL -d "{\"body\":\"$COMMENT\", \"commit_id\":\"$HASH\", \"path\":\"$FILE\"}"
           done
