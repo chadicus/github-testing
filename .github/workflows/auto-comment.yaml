@@ -15,6 +15,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
           GH_REPO: ${{ github.repository }}
-          COMMENT: "⚠️  @${{ github.event.pull_request.user.login }}, your pull request contains changes to test files."
         run: 
-          gh pr review $PR_NUMBER -r -b $COMMENT
+          gh pr review $PR_NUMBER --request-changes --body "Your pull request contains changes to test files."
